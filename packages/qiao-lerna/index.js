@@ -4,20 +4,19 @@ var qiaoConsole = require('qiao-console');
 var qiaoFile = require('qiao-file');
 var qiaoParallel = require('qiao-parallel');
 var qiaoNpms = require('qiao-npms');
-var npmCheckUpdates = require('npm-check-updates');
 var qiaoCli = require('qiao-cli');
 
 // qiao
 
 // line
-let line$3 = 0;
+let line$2 = 0;
 
 // sub folders
 const subFolders = [];
 
 // ls dir
 const lsdir = async (dir) => {
-  const files = await qiaoFile.readDir(dir);
+  const files = await qiaoFile.readdir(dir);
   for (let i = 0; i < files.length; i++) {
     const subPath = qiaoFile.path.resolve(dir, files[i]);
     const isDirRes = await qiaoFile.isDir(subPath);
@@ -35,7 +34,7 @@ const lsdir = async (dir) => {
 const checkDir = async (folderName) => {
   // check folder name
   if (!folderName) {
-    qiaoConsole.writeLine(line$3, 'need folder name');
+    qiaoConsole.writeLine(line$2, 'need folder name');
     return;
   }
 
@@ -45,14 +44,14 @@ const checkDir = async (folderName) => {
 
   // check dir is folder
   if (!dirExists) {
-    qiaoConsole.writeLine(line$3, 'folder is not exists');
+    qiaoConsole.writeLine(line$2, 'folder is not exists');
     return;
   }
 
   // get sub folders
   await lsdir(dir);
   if (!subFolders || !subFolders.length) {
-    qiaoConsole.writeLine(line$3, 'empty folder');
+    qiaoConsole.writeLine(line$2, 'empty folder');
     return;
   }
 
@@ -62,14 +61,14 @@ const checkDir = async (folderName) => {
 // qiao-console
 
 // line
-let line$2;
+let line$1;
 
 /**
  * set line
  * @param {*} l
  */
 const setLine = (l) => {
-  line$2 = l;
+  line$1 = l;
 };
 
 /**
@@ -78,7 +77,7 @@ const setLine = (l) => {
  * @param {*} res
  */
 const callback = (index, res) => {
-  qiaoConsole.writeLine(line$2 + index, res);
+  qiaoConsole.writeLine(line$1 + index, res);
 };
 
 /**
@@ -86,8 +85,8 @@ const callback = (index, res) => {
  * @param {*} l
  */
 const complete = (l) => {
-  qiaoConsole.writeLine(line$2 + l, '');
-  qiaoConsole.writeLine(line$2 + l + 1, 'qiao-lerna end');
+  qiaoConsole.writeLine(line$1 + l, '');
+  qiaoConsole.writeLine(line$1 + l + 1, 'qiao-lerna end');
 };
 
 // fs
@@ -136,7 +135,7 @@ function getPackage(p) {
  * @param {*} folderName
  * @returns
  */
-const handler$1 = async (folderName) => {
+const handler = async (folderName) => {
   // pkg
   const pkgInfo = await getPkgInfo(folderName, true);
   if (typeof pkgInfo == 'string') return pkgInfo;
@@ -162,13 +161,13 @@ const handler$1 = async (folderName) => {
 const handleDownloadCounts = (folders, line) => {
   setLine(line);
 
-  qiaoParallel.parallelByIIFE(handler$1, folders, callback, complete);
+  qiaoParallel.parallelByIIFE(handler, folders, callback, complete);
 };
 
 // qiao-console
 
 // line
-let line$1 = 0;
+let line = 0;
 
 /**
  * download counts
@@ -177,87 +176,13 @@ let line$1 = 0;
 const downloadCounts = async (folderName) => {
   // clear && start
   qiaoConsole.clear();
-  qiaoConsole.writeLine(line$1++, `start operating folder: ${folderName}`);
-
-  // dir
-  const subFolders = await checkDir(folderName);
-
-  // handler
-  handleDownloadCounts(subFolders, line$1);
-};
-
-// ncu
-
-/**
- * handler
- * @param {*} folderName
- * @returns
- */
-const handler = async (folderName) => {
-  // pkg
-  const pkgInfo = await getPkgInfo(folderName);
-  if (typeof pkgInfo == 'string') return pkgInfo;
-
-  // ncu
-  const upgraded = await npmCheckUpdates.run({
-    packageFile: pkgInfo.packageFile,
-    upgrade: false,
-  });
-
-  const json = getJson(upgraded);
-  return `${pkgInfo.packageName} : ${json}`;
-};
-
-// get json
-function getJson(s) {
-  try {
-    return JSON.stringify(s);
-  } catch (e) {
-    return s;
-  }
-}
-
-// qiao-parallel
-
-/**
- * handle multi ncu
- * @param {*} folders
- * @param {*} line
- */
-const handleMultiNCU = async (folders, line) => {
-  setLine(line);
-
-  qiaoParallel.parallelByIIFE(handler, folders, callback, complete);
-};
-
-/**
- * qiao-lerna
- *  1.判断输入的目标文件夹是否存在且是文件夹
- * 	2.获取目标文件夹下的子文件夹数组
- * 	3.遍历该数组
- * 	4.每个子文件夹下执行ncu -u
- * 	5.每个子文件夹下执行npm i
- * 	6.以上要在控制台及时显示回馈
- * 	7.最好是多进程执行以上操作
- */
-
-// line
-let line = 0;
-
-/**
- * multi ncu
- * @param {*} folderName
- */
-const multiNCU = async (folderName) => {
-  // clear && start
-  qiaoConsole.clear();
   qiaoConsole.writeLine(line++, `start operating folder: ${folderName}`);
 
   // dir
   const subFolders = await checkDir(folderName);
 
-  // parallel
-  handleMultiNCU(subFolders, line);
+  // handler
+  handleDownloadCounts(subFolders, line);
 };
 
 // cli
@@ -298,5 +223,4 @@ const pkg = async (folderName, isDev) => {
 };
 
 exports.downloadCounts = downloadCounts;
-exports.multiNCU = multiNCU;
 exports.pkg = pkg;

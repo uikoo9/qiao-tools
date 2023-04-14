@@ -1,6 +1,6 @@
 // qiao
 import { writeLine } from 'qiao-console';
-import { path, readDir, isDir, isExists } from 'qiao-file';
+import { path, readdir, isDir, isExists } from 'qiao-file';
 
 // line
 let line = 0;
@@ -10,7 +10,7 @@ const subFolders = [];
 
 // ls dir
 const lsdir = async (dir) => {
-  const files = await readDir(dir);
+  const files = await readdir(dir);
   for (let i = 0; i < files.length; i++) {
     const subPath = path.resolve(dir, files[i]);
     const isDirRes = await isDir(subPath);

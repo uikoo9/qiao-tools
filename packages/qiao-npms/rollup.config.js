@@ -8,5 +8,4 @@ module.exports = {
     format: 'cjs',
   },
   external: ['qiao-ajax', 'libnpmsearch'],
-  plugins: [],
 };
