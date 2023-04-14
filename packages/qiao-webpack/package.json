@@ -15,10 +15,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uikoo9/qiao-monorepo.git"
+    "url": "git+https://github.com/uikoo9/qiao-tools.git"
   },
   "bugs": {
-    "url": "https://github.com/uikoo9/qiao-monorepo/issues"
+    "url": "https://github.com/uikoo9/qiao-tools/issues"
   },
   "dependencies": {
     "@babel/core": "^7.21.3",

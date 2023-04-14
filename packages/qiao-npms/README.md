@@ -5,209 +5,155 @@
 
 浏览器和 nodejs 下获取 npm 信息
 
+## install
+
+安装
+
+```shell
+npm i qiao-npms
+```
+
+## use
+
+使用
+
+```javascript
+// cjs
+const { downloadCountsLastDay } = require('qiao-npms');
+
+// mjs
+import { downloadCountsLastDay } from 'qiao-npms';
+```
+
 ## api
 
 ### downloadCountsLastDay
 
 获取前一天的 npm 包下载量
 
-```javascript
-'use strict';
-
-var q = require('qiao-npms');
-
-var test = async function () {
-  try {
-    var packageName = 'qiao-cos';
-    var res = await q.downloadCountsLastDay(packageName);
-    console.log(res);
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-test();
-```
-
-return
+- packageName
+  - 类型: string
+  - 说明: npm 包名
+- return
+  - 类型: object
+  - 说明: npm 包下载相关信息
+  - ```javascript
+    {
+      downloads: 29,
+      start: '2023-04-12',
+      end: '2023-04-12',
+      package: 'qiao-cos'
+    }
+    ```
 
 ```javascript
-{
-  downloads: 0,
-  start: '2022-06-08',
-  end: '2022-06-08',
-  package: 'qiao-cos'
-}
+await downloadCountsLastDay(packageName);
 ```
 
 ### downloadCountsLastWeek
 
 获取前一周的 npm 包下载量
 
-```javascript
-'use strict';
-
-var q = require('qiao-npms');
-
-var test = async function () {
-  try {
-    var packageName = 'qiao-cos';
-    var res = await q.downloadCountsLastWeek(packageName);
-    console.log(res);
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-test();
-```
-
-return
+- packageName
+  - 类型: string
+  - 说明: npm 包名
+- return
+  - 类型: object
+  - 说明: npm 包下载相关信息
 
 ```javascript
-{
-  downloads: 80,
-  start: '2022-06-02',
-  end: '2022-06-08',
-  package: 'qiao-cos'
-}
+await downloadCountsLastWeek(packageName);
 ```
 
 ### downloadCountsLastMonth
 
 获取前一月的 npm 包下载量
 
-```javascript
-'use strict';
-
-var q = require('qiao-npms');
-
-var test = async function () {
-  try {
-    var packageName = 'qiao-cos';
-    var res = await q.downloadCountsLastMonth(packageName);
-    console.log(res);
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-test();
-```
-
-return
+- packageName
+  - 类型: string
+  - 说明: npm 包名
+- return
+  - 类型: object
+  - 说明: npm 包下载相关信息
 
 ```javascript
-{
-  downloads: 763,
-  start: '2022-05-10',
-  end: '2022-06-08',
-  package: 'qiao-cos'
-}
+await downloadCountsLastMonth(packageName);
 ```
 
 ### downloadCounts
 
 获取 npm 包下载量
 
-```javascript
-'use strict';
-
-var q = require('qiao-npms');
-
-var test = async function () {
-  try {
-    var packageName = 'qiao-cos';
-    var res = await q.downloadCounts(packageName, 'last-day');
-    console.log(res);
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-test();
-```
-
-return
+- packageName
+  - 类型: string
+  - 说明: npm 包名
+- type
+  - 类型: string
+  - 说明: npm 包下载量统计类型, 'last-day', 'last-week', 'last-month'
+- return
+  - 类型: object
+  - 说明: npm 包下载相关信息
 
 ```javascript
-{
-  downloads: 0,
-  start: '2022-06-08',
-  end: '2022-06-08',
-  package: 'qiao-cos'
-}
+await downloadCounts(packageName, 'last-day');
 ```
 
 ### getVersion
 
 获取 npm 包最新版本号
 
+- packageName
+  - 类型: string
+  - 说明: npm 包名
+- return
+  - 类型: string
+  - 说明: npm 包最新版本号
+
 ```javascript
-'use strict';
-
-var q = require('qiao-npms');
-
-var test = async function () {
-  try {
-    var packageName = 'qiao-qrcode';
-    var res = await q.getVersion(packageName);
-    console.log(res);
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-test();
+await getVersion(packageName);
 ```
 
 ### searchPackages
 
 搜索 npm 包
 
+- packageName
+  - 类型: string
+  - 说明: npm 包名
+- return
+  - 类型: object[]
+  - 说明: 搜索结果
+  - ```javascript
+    [
+      {
+        name: 'qiao-cos',
+        scope: 'unscoped',
+        version: '0.4.3',
+        description: 'tencent cos upload tool on nodejs',
+        keywords: [ 'tencent', 'cos', 'upload', 'tool', 'nodejs' ],
+        date: 2022-06-13T08:06:26.354Z,
+        links: {
+          npm: 'https://www.npmjs.com/package/qiao-cos',
+          homepage: 'https://code.insistime.com/qiao-cos',
+          repository: 'https://github.com/uikoo9/qiao-tools',
+          bugs: 'https://github.com/uikoo9/qiao-tools/issues'
+        },
+        author: { name: 'uikoo9', email: 'uikoo9@qq.com' },
+        publisher: { username: 'npm_insistime', email: 'npm@insistime.com' },
+        maintainers: [ [Object] ]
+      }
+    ]
+    ```
+
 ```javascript
-'use strict';
-
-var q = require('qiao-npms');
-
-var test = async function () {
-  try {
-    var packageName = 'qiao-cos';
-    var res = await q.searchPackages(packageName);
-    console.log(res);
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-test();
-```
-
-return
-
-```javascript
-[
-  {
-    name: 'qiao-cos',
-    scope: 'unscoped',
-    version: '0.4.3',
-    description: 'tencent cos upload tool on nodejs',
-    keywords: [ 'tencent', 'cos', 'upload', 'tool', 'nodejs' ],
-    date: 2022-06-13T08:06:26.354Z,
-    links: {
-      npm: 'https://www.npmjs.com/package/qiao-cos',
-      homepage: 'https://code.insistime.com/qiao-cos',
-      repository: 'https://github.com/uikoo9/qiao-monorepo',
-      bugs: 'https://github.com/uikoo9/qiao-monorepo/issues'
-    },
-    author: { name: 'uikoo9', email: 'uikoo9@qq.com' },
-    publisher: { username: 'npm_insistime', email: 'npm@insistime.com' },
-    maintainers: [ [Object] ]
-  }
-]
+await searchPackages(packageName);
 ```
 
 ## version
+
+### 0.0.4.20230414
+
+1. 3.0.0
 
 ### 0.0.3.20221021
 

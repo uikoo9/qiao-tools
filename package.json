@@ -1,5 +1,5 @@
 {
-  "name": "qiao-nodejs",
+  "name": "qiao-tools",
   "private": true,
   "scripts": {
     "prepare": "husky install",

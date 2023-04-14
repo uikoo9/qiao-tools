@@ -21,10 +21,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uikoo9/qiao-monorepo.git"
+    "url": "git+https://github.com/uikoo9/qiao-tools.git"
   },
   "bugs": {
-    "url": "https://github.com/uikoo9/qiao-monorepo/issues"
+    "url": "https://github.com/uikoo9/qiao-tools/issues"
   },
   "scripts": {
     "build": "rollup -c"

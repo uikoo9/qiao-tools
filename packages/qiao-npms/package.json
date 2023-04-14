@@ -16,10 +16,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uikoo9/qiao-monorepo.git"
+    "url": "git+https://github.com/uikoo9/qiao-tools.git"
   },
   "bugs": {
-    "url": "https://github.com/uikoo9/qiao-monorepo/issues"
+    "url": "https://github.com/uikoo9/qiao-tools/issues"
   },
   "scripts": {
     "build": "rollup -c"
@@ -27,5 +27,22 @@
   "dependencies": {
     "libnpmsearch": "^6.0.2",
     "qiao-ajax": "^2.8.6"
+  },
+  "nx": {
+    "namedInputs": {
+      "default": [
+        "{projectRoot}/src/**/*"
+      ]
+    },
+    "targets": {
+      "build": {
+        "inputs": [
+          "default"
+        ],
+        "outputs": [
+          "{projectRoot}/index.js"
+        ]
+      }
+    }
   }
 }

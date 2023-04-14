@@ -176,6 +176,6 @@ dist
 .pnp.*
 ## -- nodejs --
 
-## -- qiao-nodejs --
+## -- qiao-tools --
 packages/**/__tests__/1
 packages/**/__tests__/config.json
