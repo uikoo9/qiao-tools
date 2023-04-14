@@ -78,9 +78,9 @@ const uploadFolder = async (app, destFolder, sourceFolder) => {
   const failFiles = [];
 
   // upload
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     for (let i = 0; i < files.length; i++) {
-      const file = qiaoFile.path.resolve(files[i].path, files[i].name);
+      const file = files[i].path;
       const dest = destFolder + '/' + files[i].name;
       uploadFileWithCallback(app, dest, file, (err, data) => {
         allFiles.push(data);
@@ -101,9 +101,16 @@ const uploadFolder = async (app, destFolder, sourceFolder) => {
 
           console.log();
           console.timeEnd('total use');
+          console.log('all files:', allFiles.length);
+          console.log('fail files:', failFiles.length);
+          console.log('success files:', sucFiles.length);
           console.log();
 
-          resolve(obj);
+          if (allFiles.length === sucFiles.length) {
+            resolve(obj);
+          } else {
+            reject(new Error('some files upload failed'));
+          }
         }
       });
     }
