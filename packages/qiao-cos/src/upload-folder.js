@@ -1,5 +1,5 @@
 // qiao
-import { lsdir } from 'qiao-file';
+import { path, lsdir } from 'qiao-file';
 import { progress } from 'qiao-cli';
 
 // upload file
@@ -14,7 +14,14 @@ import { uploadFileWithCallback } from './upload-file.js';
  */
 export const uploadFolder = async (app, destFolder, sourceFolder) => {
   // check
-  if (!app || !app.client || !app.config) return;
+  if (!app || !app.client || !app.config) {
+    return Promise.reject(new Error('need app, app.client, app.config'));
+  }
+
+  // is absolute
+  if (!path.isAbsolute(sourceFolder)) {
+    return Promise.reject(new Error('source file path must be absolute'));
+  }
 
   // time
   console.time('total use');

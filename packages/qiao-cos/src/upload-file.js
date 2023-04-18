@@ -1,3 +1,6 @@
+// file
+import { path } from 'qiao-file';
+
 /**
  * upload file
  * @param {*} app
@@ -7,7 +10,9 @@
  */
 export const uploadFile = (app, dest, source) => {
   // check
-  if (!app || !app.client || !app.config) return;
+  if (!app || !app.client || !app.config) {
+    return Promise.reject(new Error('need app, app.client, app.config'));
+  }
 
   // upload
   return new Promise((resolve, reject) => {
@@ -27,7 +32,19 @@ export const uploadFile = (app, dest, source) => {
  */
 export const uploadFileWithCallback = (app, dest, source, cb) => {
   // check
-  if (!app || !app.client || !app.config) return;
+  if (!app || !app.client || !app.config) {
+    if (cb) cb(new Error('need app, app.client, app.config'));
+    return;
+  }
+
+  // is absolute
+  if (!path.isAbsolute(source)) {
+    if (cb) cb(new Error('source file path must be absolute'));
+    return;
+  }
+
+  // log
+  console.log(`from ${source} to ${dest}`);
 
   // upload
   app.client.sliceUploadFile(

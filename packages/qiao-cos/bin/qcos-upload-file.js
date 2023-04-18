@@ -14,8 +14,8 @@ const qcos = require('../index.js');
 const uploadFile = async (configPath, filePath, bucketPath) => {
   try {
     const cwd = process.cwd();
-    if (configPath.startsWith('./')) configPath = path.resolve(cwd, configPath);
-    if (filePath.startsWith('./')) filePath = path.resolve(cwd, filePath);
+    if (configPath.startsWith('./') || configPath.startsWith('../')) configPath = path.resolve(cwd, configPath);
+    if (filePath.startsWith('./') || filePath.startsWith('../')) filePath = path.resolve(cwd, filePath);
 
     const app = qcos(require(configPath));
     const rs = await app.uploadFile(bucketPath, filePath);
