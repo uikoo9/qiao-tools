@@ -33,7 +33,7 @@
     "npm-check-updates": "^16.10.8",
     "qiao-cli": "^3.1.5",
     "qiao-console": "^3.1.5",
-    "qiao-file": "^3.1.2",
+    "qiao-file": "^3.1.5",
     "qiao-npms": "^3.2.1",
     "qiao-parallel": "^3.1.5"
   },
