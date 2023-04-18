@@ -81,7 +81,7 @@ const uploadFolder = async (app, destFolder, sourceFolder) => {
   return new Promise((resolve, reject) => {
     for (let i = 0; i < files.length; i++) {
       const file = files[i].path;
-      const dest = destFolder + '/' + files[i].name;
+      const dest = destFolder + file.split(sourceFolder)[1];
       uploadFileWithCallback(app, dest, file, (err, data) => {
         allFiles.push(data);
         if (err || !data || data.statusCode != 200) {
