@@ -53,10 +53,10 @@ qcos folder|fo z:/workspaces/qiao-cos/test/config.json d:/test/cocos test9
 
 ```javascript
 // cjs
-const { uploadFile, uploadFolder } = require('qiao-cos');
+const COS = require('qiao-cos');
 
 // mjs
-import { uploadFile, uploadFolder } from 'qiao-cos';
+import COS from 'qiao-cos';
 ```
 
 ### qcos
@@ -66,7 +66,7 @@ import { uploadFile, uploadFolder } from 'qiao-cos';
 const config = require('./config.json');
 
 // qiao-cos
-const qcos = require('qiao-cos')(config);
+const qcos = COS(config);
 ```
 
 ### uploadFile
