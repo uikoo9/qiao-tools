@@ -2,9 +2,11 @@
 
 var COS = require('cos-nodejs-sdk-v5');
 var qiaoFile = require('qiao-file');
+var Debug = require('debug');
 var qiaoCli = require('qiao-cli');
 
 // file
+const debug = Debug('qiao-cos');
 
 /**
  * upload file
@@ -49,7 +51,7 @@ const uploadFileWithCallback = (app, dest, source, cb) => {
   }
 
   // log
-  console.log(`from ${source} to ${dest}`);
+  debug(`from ${source} to ${dest}`);
 
   // upload
   app.client.sliceUploadFile(

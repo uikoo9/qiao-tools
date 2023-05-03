@@ -1,6 +1,10 @@
 // file
 import { path } from 'qiao-file';
 
+// debug
+import Debug from 'debug';
+const debug = Debug('qiao-cos');
+
 /**
  * upload file
  * @param {*} app
@@ -44,7 +48,7 @@ export const uploadFileWithCallback = (app, dest, source, cb) => {
   }
 
   // log
-  console.log(`from ${source} to ${dest}`);
+  debug(`from ${source} to ${dest}`);
 
   // upload
   app.client.sliceUploadFile(

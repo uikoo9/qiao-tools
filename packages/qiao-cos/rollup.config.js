@@ -7,5 +7,5 @@ module.exports = {
     file: 'index.js',
     format: 'cjs',
   },
-  external: ['cos-nodejs-sdk-v5', 'qiao-file', 'qiao-cli'],
+  external: ['cos-nodejs-sdk-v5', 'qiao-file', 'qiao-cli', 'debug'],
 };
