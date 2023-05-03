@@ -179,21 +179,3 @@ var parallel = require('qiao-parallel');
   parallel.parallelByFork(jsPath, values, callback, complete);
 })();
 ```
-
-## version
-
-### 0.0.3.20230408
-
-1. 3.0.0
-
-### 0.0.2.20220928
-
-1. add eslint
-2. add rollup
-3. add readme
-
-### 0.0.1.20220517
-
-1. init
-2. parallel by iife
-3. parallel by fork

@@ -65,37 +65,3 @@ write(msg);
 // write line xy
 writeLineXY(x, y, msg);
 ```
-
-## version
-
-### 0.0.7.20230408
-
-1. 优化测试用例和 readme
-2. 3.0.0
-
-### 0.0.6.20221108
-
-1. es6
-
-### 0.0.5.20220422
-
-1. add lerna
-
-### 0.0.4.20210318
-
-1. modify md
-
-### 0.0.3.20201104
-
-1. modify md
-2. add other method
-
-### 0.0.2.20200807
-
-1. modify md
-
-### 0.0.1.20200806
-
-1. init project
-2. clear
-3. write line

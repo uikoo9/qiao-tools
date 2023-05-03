@@ -75,14 +75,3 @@ onMsg(function (msg) {
 
 send('hello main process');
 ```
-
-## version
-
-### 0.0.2.20230408
-
-1. 3.0.0
-
-### 0.0.1.20200807
-
-1. init project
-2. fork

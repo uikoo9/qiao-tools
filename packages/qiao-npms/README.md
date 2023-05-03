@@ -148,22 +148,3 @@ await getVersion(packageName);
 ```javascript
 await searchPackages(packageName);
 ```
-
-## version
-
-### 0.0.4.20230414
-
-1. 3.0.0
-
-### 0.0.3.20221021
-
-1. get version
-
-### 0.0.2.20220626
-
-1. search packages
-
-### 0.0.1.20220609
-
-1. init project
-2. download counts
