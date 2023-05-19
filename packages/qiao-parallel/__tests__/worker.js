@@ -3,7 +3,6 @@ const q = require('qiao-console');
 
 // vars
 const values = require('./_values.js');
-const handler = require('./_handler.js');
 const callback = require('./_callback.js');
 const complete = require('./_complete.js');
 
@@ -14,5 +13,6 @@ const parallel = require('../index.js');
 (function () {
   q.clear();
 
-  parallel.parallelByIIFE(handler, values, callback, complete);
+  const jsPath = require('path').resolve(__dirname, './worker-handler.js');
+  parallel.parallelByWorker(jsPath, values, callback, complete);
 })();

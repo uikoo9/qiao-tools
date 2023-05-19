@@ -1,20 +1,18 @@
-'use strict';
-
 // q
-var q = require('qiao-console');
+const q = require('qiao-console');
 
 // vars
-var values = require('./_values.js');
-var callback = require('./_callback.js');
-var complete = require('./_complete.js');
+const values = require('./_values.js');
+const callback = require('./_callback.js');
+const complete = require('./_complete.js');
 
 // parallel
-var parallel = require('../index.js');
+const parallel = require('../index.js');
 
 // test
 (function () {
   q.clear();
 
-  var jsPath = require('path').resolve(__dirname, './fork-handler.js');
+  const jsPath = require('path').resolve(__dirname, './fork-handler.js');
   parallel.parallelByFork(jsPath, values, callback, complete);
 })();

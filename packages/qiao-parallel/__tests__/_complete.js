@@ -1,7 +1,5 @@
-'use strict';
-
 // q
-var q = require('qiao-console');
+const q = require('qiao-console');
 
 /**
  * complete

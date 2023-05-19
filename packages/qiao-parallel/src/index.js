@@ -10,7 +10,7 @@ import parallel from './parallel.js';
  * @returns
  */
 export const parallelByIIFE = async function (func, values, callback, complete) {
-  parallel(func, values, callback, complete);
+  parallel(values, callback, complete, { type: 'parallel', item: func });
 };
 
 /**
@@ -21,5 +21,16 @@ export const parallelByIIFE = async function (func, values, callback, complete) 
  * @param {*} complete
  */
 export const parallelByFork = async function (jsPath, values, callback, complete) {
-  parallel(null, values, callback, complete, jsPath);
+  parallel(values, callback, complete, { type: 'fork', item: jsPath });
+};
+
+/**
+ * parallel by worker
+ * @param {*} jsPath
+ * @param {*} values
+ * @param {*} callback
+ * @param {*} complete
+ */
+export const parallelByWorker = async function (jsPath, values, callback, complete) {
+  parallel(values, callback, complete, { type: 'worker', item: jsPath });
 };

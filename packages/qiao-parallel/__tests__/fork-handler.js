@@ -1,7 +1,5 @@
-'use strict';
-
 // handler
-var handler = require('./_handler.js');
+const handler = require('./_handler.js');
 
 // fork handler
 async function forkHandler() {
@@ -9,10 +7,10 @@ async function forkHandler() {
   if (!process || !process.argv) return;
 
   // value
-  var value = parseInt(process.argv[2]);
+  const value = parseInt(process.argv[2]);
 
   // msg
-  var msg = await handler(value);
+  const msg = await handler(value);
   process.send(msg);
 }
 

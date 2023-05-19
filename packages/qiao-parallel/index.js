@@ -1,27 +1,27 @@
 'use strict';
 
+var worker_threads = require('worker_threads');
 var q = require('qiao-process');
 
-// q
+// worker
 
 // count
 let count = 0;
 
 /**
  * parallel
- * @param {*} func
  * @param {*} values
  * @param {*} callback
  * @param {*} complete
- * @param {*} jsPath
+ * @param {*} options
  * @returns
  */
-async function parallel(func, values, callback, complete, jsPath) {
+async function parallel(values, callback, complete, options) {
   // time
   console.time('qiao-parallel');
 
   // check values
-  if (!values || !values.length) {
+  if (!values || !values.length || !options) {
     if (complete) complete(0);
     console.timeEnd('qiao-parallel');
 
@@ -31,13 +31,11 @@ async function parallel(func, values, callback, complete, jsPath) {
   // run
   const valuesLength = values.length;
   for (let i = 0; i < valuesLength; i++) {
-    (async (index, func, value, valuesLength) => {
-      if (jsPath) {
-        handlerByFork(index, jsPath, value, valuesLength, callback, complete);
-      } else {
-        handlerByIIFE(index, func, value, valuesLength, callback, complete);
-      }
-    })(i, func, values[i], valuesLength);
+    (async (index, value, valuesLength, options) => {
+      if (options.type === 'parallel') handlerByIIFE(index, options.item, value, valuesLength, callback, complete);
+      if (options.type === 'fork') handlerByFork(index, options.item, value, valuesLength, callback, complete);
+      if (options.type === 'worker') handlerByWorker(index, options.item, value, valuesLength, callback, complete);
+    })(i, values[i], valuesLength, options);
   }
 }
 
@@ -60,6 +58,21 @@ function handlerByFork(index, jsPath, value, valuesLength, callback, complete) {
       onComplete(complete, valuesLength);
     },
   );
+}
+
+function handlerByWorker(index, jsPath, value, valuesLength, callback, complete) {
+  const worker = new worker_threads.Worker(jsPath, {
+    workerData: value,
+  });
+  worker.on('message', function (res) {
+    onCallback(callback, index, res);
+  });
+  worker.on('error', function (error) {
+    console.log(error);
+  });
+  worker.on('exit', function () {
+    onComplete(complete, valuesLength);
+  });
 }
 
 // on callback
@@ -87,7 +100,7 @@ function onComplete(complete, valuesLength) {
  * @returns
  */
 const parallelByIIFE = async function (func, values, callback, complete) {
-  parallel(func, values, callback, complete);
+  parallel(values, callback, complete, { type: 'parallel', item: func });
 };
 
 /**
@@ -98,8 +111,20 @@ const parallelByIIFE = async function (func, values, callback, complete) {
  * @param {*} complete
  */
 const parallelByFork = async function (jsPath, values, callback, complete) {
-  parallel(null, values, callback, complete, jsPath);
+  parallel(values, callback, complete, { type: 'fork', item: jsPath });
+};
+
+/**
+ * parallel by worker
+ * @param {*} jsPath
+ * @param {*} values
+ * @param {*} callback
+ * @param {*} complete
+ */
+const parallelByWorker = async function (jsPath, values, callback, complete) {
+  parallel(values, callback, complete, { type: 'worker', item: jsPath });
 };
 
 exports.parallelByFork = parallelByFork;
 exports.parallelByIIFE = parallelByIIFE;
+exports.parallelByWorker = parallelByWorker;

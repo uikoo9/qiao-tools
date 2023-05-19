@@ -7,5 +7,5 @@ module.exports = {
     file: 'index.js',
     format: 'cjs',
   },
-  external: ['qiao-process'],
+  external: ['worker_threads', 'qiao-process'],
 };

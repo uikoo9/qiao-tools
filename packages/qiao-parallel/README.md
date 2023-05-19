@@ -19,10 +19,10 @@ npm i qiao-parallel
 
 ```javascript
 // cjs
-const { parallelByIIFE, parallelByFork } = require('qiao-parallel');
+const { parallelByIIFE, parallelByFork, parallelByWorker } = require('qiao-parallel');
 
 // mjs
-import { parallelByIIFE, parallelByFork } from 'qiao-parallel';
+import { parallelByIIFE, parallelByFork, parallelByWorker } from 'qiao-parallel';
 ```
 
 ## code
@@ -34,11 +34,6 @@ import { parallelByIIFE, parallelByFork } from 'qiao-parallel';
 并行任务池
 
 ```javascript
-'use strict';
-
-/**
- * values
- */
 module.exports = [100, 300, 200, 400];
 ```
 
@@ -47,10 +42,8 @@ module.exports = [100, 300, 200, 400];
 单个任务完成回调
 
 ```javascript
-'use strict';
-
 // q
-var q = require('qiao-console');
+const q = require('qiao-console');
 
 /**
  * callback
@@ -67,10 +60,8 @@ module.exports = function (index, res) {
 所有任务完成回调
 
 ```javascript
-'use strict';
-
 // q
-var q = require('qiao-console');
+const q = require('qiao-console');
 
 /**
  * complete
@@ -86,8 +77,6 @@ module.exports = function (l) {
 模拟任务代码
 
 ```javascript
-'use strict';
-
 /**
  * handler
  * @param {*} timeout
@@ -107,10 +96,8 @@ module.exports = function (timeout) {
 模拟任务代码-fork 模式
 
 ```javascript
-'use strict';
-
 // handler
-var handler = require('./_handler.js');
+const handler = require('./_handler.js');
 
 // fork handler
 async function forkHandler() {
@@ -118,10 +105,10 @@ async function forkHandler() {
   if (!process || !process.argv) return;
 
   // value
-  var value = parseInt(process.argv[2]);
+  const value = parseInt(process.argv[2]);
 
   // msg
-  var msg = await handler(value);
+  const msg = await handler(value);
   process.send(msg);
 }
 
@@ -133,19 +120,17 @@ forkHandler();
 ### parallel by IIFE
 
 ```javascript
-'use strict';
-
 // q
-var q = require('qiao-console');
+const q = require('qiao-console');
 
 // vars
-var values = require('./_values.js');
-var handler = require('./_handler.js');
-var callback = require('./_callback.js');
-var complete = require('./_complete.js');
+const values = require('./_values.js');
+const handler = require('./_handler.js');
+const callback = require('./_callback.js');
+const complete = require('./_complete.js');
 
 // parallel
-var parallel = require('qiao-parallel');
+const parallel = require('../index.js');
 
 // test
 (function () {
@@ -158,24 +143,45 @@ var parallel = require('qiao-parallel');
 ### parallel by fork
 
 ```javascript
-'use strict';
-
 // q
-var q = require('qiao-console');
+const q = require('qiao-console');
 
 // vars
-var values = require('./_values.js');
-var callback = require('./_callback.js');
-var complete = require('./_complete.js');
+const values = require('./_values.js');
+const callback = require('./_callback.js');
+const complete = require('./_complete.js');
 
 // parallel
-var parallel = require('qiao-parallel');
+const parallel = require('../index.js');
 
 // test
 (function () {
   q.clear();
 
-  var jsPath = require('path').resolve(__dirname, './fork-handler.js');
+  const jsPath = require('path').resolve(__dirname, './fork-handler.js');
   parallel.parallelByFork(jsPath, values, callback, complete);
+})();
+```
+
+### parallel by worker
+
+```javascript
+// q
+const q = require('qiao-console');
+
+// vars
+const values = require('./_values.js');
+const callback = require('./_callback.js');
+const complete = require('./_complete.js');
+
+// parallel
+const parallel = require('../index.js');
+
+// test
+(function () {
+  q.clear();
+
+  const jsPath = require('path').resolve(__dirname, './worker-handler.js');
+  parallel.parallelByWorker(jsPath, values, callback, complete);
 })();
 ```
