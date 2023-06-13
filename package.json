@@ -1,16 +1,17 @@
 {
   "name": "qiao-tools",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "prepare": "husky install",
-    "clean": "lerna clean -y && lerna exec 'rm -rf package-lock.json'",
-    "init": "lerna bootstrap",
     "build": "lerna run build",
     "prettier": "prettier --write .",
     "eslintfix": "eslint . --ext .js --fix",
     "test": "lerna run test",
     "lint": "npm run build && npm run prettier && npm run eslintfix && npm run test",
-    "postinstall": "npm run clean && npm run init && npm run lint",
+    "postinstall": "npm run lint",
     "pb": "lerna publish",
     "graph": "nx graph",
     "check": "ncu && lerna exec ncu --concurrency=1 --ignore=qiao-cli",
