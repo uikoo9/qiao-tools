@@ -1,6 +1,5 @@
 {
   "version": "3.3.4",
-  "useWorkspaces": true,
   "command": {
     "version": {
       "allowBranch": "master"
