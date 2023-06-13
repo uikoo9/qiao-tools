@@ -38,7 +38,7 @@
     "cos-nodejs-sdk-v5": "^2.12.1",
     "debug": "^4.3.4",
     "qiao-cli": "^3.3.3",
-    "qiao-file": "^3.1.8"
+    "qiao-file": "^3.1.9"
   },
   "nx": {
     "namedInputs": {
