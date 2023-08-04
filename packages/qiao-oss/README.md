@@ -1,6 +1,21 @@
-# qiao-oss
+## qiao-oss
+
+[![npm version](https://img.shields.io/npm/v/qiao-oss.svg?style=flat-square)](https://www.npmjs.org/package/qiao-oss)
+[![npm downloads](https://img.shields.io/npm/dm/qiao-oss.svg?style=flat-square)](https://npm-stat.com/charts.html?package=qiao-oss)
+
+nodejs 下阿里云 oss 常见 api 封装
+
+## install
+
+安装
+
+```shell
+npm i qiao-oss
+```
 
 ## config.json
+
+配置文件
 
 ```json
 {
@@ -11,128 +26,89 @@
 }
 ```
 
-## api
+## cli
 
-### uploadFileSync
+也可以在 cli 下使用
 
-```javascript
-'use strict';
+```shell
+# 全局安装
+npm i -g qiao-oss
 
-var q = require('qiao-oss');
-var client = q.client(require('./config.json'));
+# 帮助
+qoss
+qoss -h
 
-/**
- * upload file demo
- * upload d:/test.js to your bucket's test/test.js
- */
-var test = async function () {
-  try {
-    var destPath = 'test/test.js';
-    var sourceFile = 'd:/test.js';
+# 上传文件
+qoss file|fi z:/workspaces/qiao-oss/test/config.json d:/test.js test.js
 
-    var rs = await q.uploadFileSync(client, destPath, sourceFile);
-    console.log(rs);
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-test();
+# 上传文件夹
+qoss folder|fo z:/workspaces/qiao-oss/test/config.json d:/test/cooss test9
 ```
 
-### uploadFolderSync
+## api
+
+### use
+
+使用
 
 ```javascript
-'use strict';
+// cjs
+const OSS = require('qiao-oss');
 
-var q = require('qiao-oss');
-var client = q.client(require('./config.json'));
+// mjs
+import OSS from 'qiao-oss';
+```
 
-/**
- * upload folder
- * upload d:/test folder's files to your bucket's test folder
- */
-var test = async function () {
-  try {
-    var destPath = 'test';
-    var sourceFolder = 'd:/test/cocos';
+### qoss
 
-    var rs = await q.uploadFolderSync(client, destPath, sourceFolder);
-    console.log(rs);
-  } catch (e) {
-    console.log(e);
-  }
-};
+```javascript
+// config
+const config = require('./config.json');
 
-test();
+// qiao-oss
+const qoss = OSS(config);
 ```
 
 ### uploadFile
 
+上传文件
+
+- destPath
+  - 类型: string
+  - 说明: oss 的目标路径
+- sourceFile
+  - 类型: string
+  - 说明: 待上传的文件路径
+- return
+  - 类型: object
+  - 说明: oss 返回的结果
+
 ```javascript
-'use strict';
+const destPath = 'test/test.js';
+const sourceFile = '/your/test.js';
 
-var q = require('qiao-oss');
-var client = q.client(require('./config.json'));
-
-/**
- * upload file demo
- * upload d:/test.js to your bucket's test/test.js
- */
-var test = function () {
-  var destPath = 'test/test.js';
-  var sourceFile = 'd:/test.js';
-
-  q.uploadFile(client, destPath, sourceFile, function (err, rs) {
-    if (err) throw err;
-
-    console.log(rs);
-  });
-};
-
-test();
+const rs = await qoss.uploadFile(destPath, sourceFile);
+console.log(rs);
 ```
 
 ### uploadFolder
 
+上传文件夹
+
+- destPath
+  - 类型: string
+  - 说明: oss 的目标路径
+- sourceFolder
+  - 类型: string
+  - 说明: 待上传的文件夹路径
+- return
+  - 类型: object
+  - 说明: oss 返回的结果
+
 ```javascript
-'use strict';
+const destPath = 'test';
+const sourceFolder = '/your/folder';
 
-var q = require('qiao-oss');
-var client = q.client(require('./config.json'));
-
-/**
- * upload folder
- * upload d:/test folder's files to your bucket's test folder
- */
-var test = function () {
-  var destPath = 'test';
-  var sourceFolder = 'd:/test/cocos';
-
-  q.uploadFolder(client, destPath, sourceFolder, function (err, rs) {
-    if (err) throw err;
-
-    console.log(rs);
-  });
-};
-
-test();
-```
-
-## also in cli
-
-```shell
-npm install -g qiao-oss
-
-qoss file 	z:/workspaces/qiao-oss/test/config.json 	d:/test.js	test.js
-qoss folder	z:/workspaces/qiao-oss/test/config.json 	d:/test/cocos	test9 	-i
-
-or
-
-qoss fi 	z:/workspaces/qiao-oss/test/config.json 	d:/test.js 	test.js
-qoss fo		z:/workspaces/qiao-oss/test/config.json 	d:/test/cocos 	test9 	-i
-
-or
-
-qoss | qoss -h for help
+const rs = await qoss.uploadFolder(destPath, sourceFolder);
+console.log(rs);
 ```
