@@ -20,8 +20,8 @@
     "qoss": "./bin/qoss.js"
   },
   "dependencies": {
-    "ali-oss": "^6.17.1",
-    "qiao-cli": "^1.1.1",
-    "qiao-file": "^2.0.3"
+    "ali-oss": "^6.18.0",
+    "qiao-cli": "^3.3.3",
+    "qiao-file": "^3.1.9"
   }
 }
