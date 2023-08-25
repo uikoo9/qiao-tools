@@ -13,8 +13,8 @@ const ruleForImg = require('./rule-for-img.js');
 // rule for react
 const ruleForReact = require('./rule-for-react.js');
 
-// rule for art
-const ruleForArt = require('./rule-for-art.js');
+// rule for ejs
+const ruleForEjs = require('./rule-for-ejs.js');
 
 /**
  * module
@@ -30,7 +30,7 @@ module.exports = function (isDev, cssIncludes, postCssConfig) {
       ruleForSass(isDev, postCssConfig),
       ruleForImg,
       ruleForReact,
-      ruleForArt,
+      ruleForEjs,
     ],
   };
 };
