@@ -1,9 +1,7 @@
 #!/usr/bin/env node
 
-'use strict';
-
 // qiao
-var qiao = {};
+const qiao = {};
 qiao.cli = require('qiao-cli');
 
 // cmds

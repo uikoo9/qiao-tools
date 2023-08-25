@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * webpack performance
  *  https://webpack.docschina.org/configuration/performance/

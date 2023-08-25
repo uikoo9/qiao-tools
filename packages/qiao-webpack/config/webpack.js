@@ -1,25 +1,25 @@
 // path
-var path = require('path');
+const path = require('path');
 
 // webpack merge
-var merge = require('webpack-merge').merge;
+const merge = require('webpack-merge').merge;
 
 // webpack options
-var webpack_options = require('./webpack-options.js');
+const webpack_options = require('./webpack-options.js');
 
 /**
  * webpack build config
  */
 exports.build = function (configPath, target, isAnalyzer) {
   // qiao.webpack.js
-  var qiaoWebpack = getQiaoWebpackJs(configPath);
+  const qiaoWebpack = getQiaoWebpackJs(configPath);
   if (!qiaoWebpack) return;
 
   // options
-  var options = webpack_options(false, qiaoWebpack, isAnalyzer);
+  const options = webpack_options(false, qiaoWebpack, isAnalyzer);
 
   // opt
-  var opt = {};
+  const opt = {};
   opt.entry = qiaoWebpack.entry;
   opt.output = qiaoWebpack.output;
   opt.resolve = qiaoWebpack.resolve;
@@ -36,14 +36,14 @@ exports.build = function (configPath, target, isAnalyzer) {
  */
 exports.dev = function (configPath, target) {
   // qiao.webpack.js
-  var qiaoWebpack = getQiaoWebpackJs(configPath);
+  const qiaoWebpack = getQiaoWebpackJs(configPath);
   if (!qiaoWebpack) return;
 
   // options
-  var options = webpack_options(true, qiaoWebpack);
+  const options = webpack_options(true, qiaoWebpack);
 
   // opt
-  var opt = {};
+  const opt = {};
   opt.entry = qiaoWebpack.entry;
   opt.output = qiaoWebpack.output;
   opt.resolve = qiaoWebpack.resolve;
@@ -58,10 +58,10 @@ exports.dev = function (configPath, target) {
 
 // get qiao webpack js
 function getQiaoWebpackJs(configPath) {
-  var cwd = process.cwd();
+  const cwd = process.cwd();
   if (configPath.startsWith('./')) configPath = path.resolve(cwd, configPath);
 
-  var qiaoWebpack;
+  let qiaoWebpack;
   try {
     qiaoWebpack = require(configPath);
   } catch (e) {

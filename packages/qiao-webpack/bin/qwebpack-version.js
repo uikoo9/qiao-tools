@@ -1,7 +1,5 @@
-'use strict';
-
 // qiao
-var qiao = {};
+const qiao = {};
 qiao.cli = require('qiao-cli');
 
 // cmd for common

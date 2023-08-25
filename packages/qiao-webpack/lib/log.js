@@ -1,9 +1,9 @@
 // qiao
-var qiao = {};
+const qiao = {};
 qiao.cli = require('qiao-cli');
 
 // stats options
-var statsOptions = require('../config/webpack-stats.js');
+const statsOptions = require('../config/webpack-stats.js');
 
 /**
  * log
@@ -53,16 +53,16 @@ exports.showErr = function (err, stats) {
     return true;
   }
 
-  var errorOrWarn = false;
+  let errorOrWarn = false;
 
-  var info = stats.toJson();
+  const info = stats.toJson();
   if (stats.hasErrors() && info.errors) {
     errorOrWarn = true;
-    for (var i = 0; i < info.errors.length; i++) exports.danger(info.errors[i].message);
+    for (let i = 0; i < info.errors.length; i++) exports.danger(info.errors[i].message);
   }
   if (stats.hasWarnings() && info.warnings) {
     errorOrWarn = true;
-    for (var j = 0; j < info.warnings.length; j++) exports.danger(info.warnings[j].message);
+    for (let j = 0; j < info.warnings.length; j++) exports.danger(info.warnings[j].message);
   }
 
   return errorOrWarn;

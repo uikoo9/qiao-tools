@@ -1,7 +1,5 @@
-'use strict';
-
 // qiao
-var qiao = {};
+const qiao = {};
 qiao.cli = require('qiao-cli');
 qiao.webpack = require('../lib/qiao-webpack.js');
 

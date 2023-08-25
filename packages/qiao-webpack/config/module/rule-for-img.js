@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * https://webpack.docschina.org/guides/asset-modules/
  */

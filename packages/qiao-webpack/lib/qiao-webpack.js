@@ -1,22 +1,20 @@
-'use strict';
-
 // webpack
-var webpack = require('webpack');
+const webpack = require('webpack');
 
 // webpack dev server
-var WebpackDevServer = require('webpack-dev-server');
+const WebpackDevServer = require('webpack-dev-server');
 
 // log util
-var logUtil = require('./log.js');
+const logUtil = require('./log.js');
 
 // webpack config
-var webpackConfig = require('../config/webpack.js');
+const webpackConfig = require('../config/webpack.js');
 
 /**
  * analyzer
  */
 exports.analyzer = function (configPath, target) {
-  var configJs = webpackConfig.build(configPath, target, true);
+  const configJs = webpackConfig.build(configPath, target, true);
   if (!configJs) return;
 
   webpackCompiler(configJs);
@@ -26,7 +24,7 @@ exports.analyzer = function (configPath, target) {
  * build
  */
 exports.build = function (configPath, target) {
-  var configJs = webpackConfig.build(configPath, target);
+  const configJs = webpackConfig.build(configPath, target);
   if (!configJs) return;
 
   webpackCompiler(configJs);
@@ -37,23 +35,23 @@ exports.build = function (configPath, target) {
  */
 exports.dev = function (configPath, target) {
   // config js
-  var configJs = webpackConfig.dev(configPath, target);
+  const configJs = webpackConfig.dev(configPath, target);
   if (!configJs) return;
 
   // compiler
-  var compiler = webpack(configJs);
+  const compiler = webpack(configJs);
 
   // dev server options
-  var devServerOptions = configJs.devServer;
+  const devServerOptions = configJs.devServer;
 
   // server
-  var server = new WebpackDevServer(devServerOptions, compiler);
+  const server = new WebpackDevServer(devServerOptions, compiler);
   server.start();
 };
 
 // webpack compiler
 function webpackCompiler(configJs) {
-  var compiler = webpack(configJs);
+  const compiler = webpack(configJs);
   compiler.run(function (err, stats) {
     var hasError = logUtil.showErr(err, stats);
     if (hasError) return;

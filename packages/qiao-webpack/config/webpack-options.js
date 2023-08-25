@@ -1,16 +1,14 @@
-'use strict';
-
 // webpack module
-var webpack_module = require('./module/module.js');
+const webpack_module = require('./module/module.js');
 
 // webpack plugins
-var webpack_plugins = require('./plugins/plugins.js');
+const webpack_plugins = require('./plugins/plugins.js');
 
 // webpack performance
-var webpack_performance = require('./webpack-performance.js');
+const webpack_performance = require('./webpack-performance.js');
 
 // webpack optimization
-var webpack_optimization = require('./optimization/optimization.js');
+const webpack_optimization = require('./optimization/optimization.js');
 
 /**
  * webpack options
@@ -21,7 +19,7 @@ var webpack_optimization = require('./optimization/optimization.js');
  */
 module.exports = function (isDev, qiaoWebpack, isAnalyzer) {
   // options
-  var options = {
+  const options = {
     mode: isDev ? 'development' : 'production',
     module: webpack_module(isDev, qiaoWebpack.cssIncludes, qiaoWebpack.postCssConfig),
     plugins: webpack_plugins(isDev, qiaoWebpack.plugins, isAnalyzer),

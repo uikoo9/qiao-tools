@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * rule for react
  *  npm i -D babel-loader @babel/core @babel/preset-react

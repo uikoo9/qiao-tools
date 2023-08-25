@@ -1,10 +1,8 @@
-'use strict';
-
 // mini
-var minimizer = require('./minimizer.js');
+const minimizer = require('./minimizer.js');
 
 // default cache groups
-var defaultCacheGroups = require('./cache-groups.js');
+const defaultCacheGroups = require('./cache-groups.js');
 
 /**
  * optimization

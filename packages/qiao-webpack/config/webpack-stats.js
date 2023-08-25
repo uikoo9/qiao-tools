@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * webpack stats
  */

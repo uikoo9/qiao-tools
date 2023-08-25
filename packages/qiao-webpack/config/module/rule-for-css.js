@@ -1,7 +1,5 @@
-'use strict';
-
 // mini css extract
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 /**
  * rule for css
@@ -13,7 +11,7 @@ var MiniCssExtractPlugin = require('mini-css-extract-plugin');
  */
 module.exports = function (isDev, cssIncludes) {
   // use
-  var use = [
+  const use = [
     isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
     {
       loader: require.resolve('css-loader'),
@@ -24,7 +22,7 @@ module.exports = function (isDev, cssIncludes) {
   ];
 
   // default css includes
-  var defaultCssIncludes = [/node_modules[\\/]@wangeditor/, /node_modules[\\/]prismjs/];
+  const defaultCssIncludes = [/node_modules[\\/]@wangeditor/, /node_modules[\\/]prismjs/];
 
   // return
   return {

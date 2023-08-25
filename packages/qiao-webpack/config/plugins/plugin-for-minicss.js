@@ -1,7 +1,5 @@
-'use strict';
-
 // mini css extract plugin
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 /**
  * mini css extract plugin

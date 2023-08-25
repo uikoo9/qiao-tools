@@ -1,10 +1,8 @@
-'use strict';
-
 // mini css extract
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // postcsss config
-var defaultPostcssConfig = require('./postcss.js');
+const defaultPostcssConfig = require('./postcss.js');
 
 /**
  * rule for scss
@@ -13,7 +11,7 @@ var defaultPostcssConfig = require('./postcss.js');
  */
 module.exports = function (isDev, postCssConfig) {
   // use
-  var use = [
+  const use = [
     isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
     'css-loader',
     {
