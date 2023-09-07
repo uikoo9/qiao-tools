@@ -8,20 +8,28 @@ const qpro = require('../index.js');
 /**
  * eslint
  * @param {*} configPath
- * @param {*} folderPath
- * @param {*} bucketPath
- * @param {*} options
  */
 const eslint = async (configPath) => {
   try {
-    const cwd = process.cwd();
-    if (configPath.startsWith('./') || configPath.startsWith('../')) configPath = path.resolve(cwd, configPath);
+    // final path
+    let finalPath;
 
-    qpro.eslint();
+    // config path
+    if (configPath) {
+      const cwd = process.cwd();
+      if (configPath.startsWith('./') || configPath.startsWith('../')) configPath = path.resolve(cwd, configPath);
+      finalPath = configPath;
+    }
+
+    // eslint
+    console.log('qiao-project / eslint / start');
+    await qpro.eslint(finalPath);
+    console.log('qiao-project / eslint / end');
   } catch (e) {
+    console.log('qiao-project / eslint / error');
     console.log(e);
   }
 };
 
 // cmd for eslint
-cli.cmd.command('eslint <configPath>').description('eslint').action(eslint);
+cli.cmd.command('eslint [configPath]').description('eslint').action(eslint);
