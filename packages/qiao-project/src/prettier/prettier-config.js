@@ -1,3 +1,6 @@
+/**
+ * prettier config
+ */
 export const config = {
   printWidth: 120,
   tabWidth: 2,

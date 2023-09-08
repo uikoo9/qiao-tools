@@ -2,7 +2,7 @@
 import { ESLint } from 'eslint';
 
 // config
-import { config as defaultConfig } from './config/eslint-config.js';
+import { config as defaultConfig } from './eslint-config.js';
 
 /**
  * run eslint

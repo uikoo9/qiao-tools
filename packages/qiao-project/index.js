@@ -124,6 +124,9 @@ function getConfig$1(configPath) {
   }
 }
 
+/**
+ * prettier config
+ */
 const config = {
   printWidth: 120,
   tabWidth: 2,

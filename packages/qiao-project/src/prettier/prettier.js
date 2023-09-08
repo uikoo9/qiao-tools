@@ -5,7 +5,7 @@ import * as prettier from 'prettier';
 import { lsdir, readFile, writeFile } from 'qiao-file';
 
 // config
-import { config as defaultConfig } from '../config/prettier-config.js';
+import { config as defaultConfig } from './prettier-config.js';
 
 // ignore
 import { isIgnore, getIgnores } from './prettier-ignore.js';
