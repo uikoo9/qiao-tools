@@ -144,6 +144,57 @@ const config = {
   embeddedLanguageFormatting: 'auto',
 };
 
+// file
+
+/**
+ * is ignore
+ * @param {*} filepath
+ * @param {*} ignores
+ * @returns
+ */
+const isIgnore = async (filepath, ignores) => {
+  // check
+  let ignore = false;
+  for (let i = 0; i < ignores.length; i++) {
+    if (filepath.indexOf(ignores[i]) > -1) {
+      ignore = true;
+      break;
+    }
+  }
+
+  return ignore;
+};
+
+/**
+ * get ignores
+ * @returns
+ */
+const getIgnores = async () => {
+  // cwd
+  const cwd = process.cwd();
+
+  // ignore path
+  const ignores = [];
+  const ignorePath = qiaoFile.path.resolve(cwd, './.prettierignore');
+
+  // check
+  const ignoreExists = await qiaoFile.isExists(ignorePath);
+  if (!ignoreExists) return ignores;
+
+  //
+  return new Promise((resolve) => {
+    qiaoFile.readFileLineByLine(
+      ignorePath,
+      (line) => {
+        if (!line.startsWith('#') && line) ignores.push(line);
+      },
+      () => {
+        resolve(ignores);
+      },
+    );
+  });
+};
+
 // eslint
 
 /**
@@ -196,9 +247,12 @@ async function formatFiles(cwd, config) {
 
     // files
     const files = res.files;
+    const ignores = await getIgnores();
     for (let i = 0; i < files.length; i++) {
       // filepath
       const filepath = files[i].path;
+      const fileIgnore = await isIgnore(filepath, ignores);
+      if (fileIgnore) continue;
       console.log('qiao-project / prettier / format ', filepath);
 
       // check
@@ -210,8 +264,8 @@ async function formatFiles(cwd, config) {
       if (isFormated) continue;
       const formatContent = await prettier__namespace.format(content, config);
       await qiaoFile.writeFile(filepath, formatContent);
-      console.log('qiao-project / prettier / end');
     }
+    console.log('qiao-project / prettier / end');
   } catch (error) {
     console.log('qiao-project / prettier / format /', error);
   }

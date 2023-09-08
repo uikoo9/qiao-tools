@@ -5,7 +5,10 @@ import * as prettier from 'prettier';
 import { lsdir, readFile, writeFile } from 'qiao-file';
 
 // config
-import { config as defaultConfig } from './config/prettier-config.js';
+import { config as defaultConfig } from '../config/prettier-config.js';
+
+// ignore
+import { isIgnore, getIgnores } from './prettier-ignore.js';
 
 /**
  * run prettier
@@ -57,9 +60,12 @@ async function formatFiles(cwd, config) {
 
     // files
     const files = res.files;
+    const ignores = await getIgnores();
     for (let i = 0; i < files.length; i++) {
       // filepath
       const filepath = files[i].path;
+      const fileIgnore = await isIgnore(filepath, ignores);
+      if (fileIgnore) continue;
       console.log('qiao-project / prettier / format ', filepath);
 
       // check
@@ -71,8 +77,8 @@ async function formatFiles(cwd, config) {
       if (isFormated) continue;
       const formatContent = await prettier.format(content, config);
       await writeFile(filepath, formatContent);
-      console.log('qiao-project / prettier / end');
     }
+    console.log('qiao-project / prettier / end');
   } catch (error) {
     console.log('qiao-project / prettier / format /', error);
   }
