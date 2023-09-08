@@ -38,7 +38,7 @@
     "ali-oss": "^6.18.0",
     "debug": "^4.3.4",
     "qiao-cli": "^3.4.7",
-    "qiao-file": "^3.1.9"
+    "qiao-file": "^3.2.4"
   },
   "nx": {
     "namedInputs": {

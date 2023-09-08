@@ -12,4 +12,5 @@ nodejs cli tools
 6. [qiao-oss](./packages/qiao-oss/README.md): nodejs 下阿里云 oss 常见 api 封装
 7. [qiao-parallel](./packages/qiao-parallel/README.md): nodejs 下并行执行任务
 8. [qiao-process](./packages/qiao-process/README.md): nodejs 下 process 能力
-9. [qiao-webpack](./packages/qiao-webpack/README.md): 开箱即用的 webpack 脚手架
+9. [qiao-project](./packages/qiao-project/README.md): frontend monorepo project tool
+10. [qiao-webpack](./packages/qiao-webpack/README.md): 开箱即用的 webpack 脚手架
