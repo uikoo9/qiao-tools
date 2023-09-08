@@ -1,6 +1,6 @@
 {
   "name": "qiao-lerna",
-  "version": "3.3.9",
+  "version": "3.4.7",
   "description": "lerna tools",
   "keywords": [
     "lerna",
@@ -31,11 +31,11 @@
   },
   "dependencies": {
     "npm-check-updates": "^16.12.2",
-    "qiao-cli": "^3.3.3",
-    "qiao-console": "^3.2.7",
+    "qiao-cli": "^3.4.7",
+    "qiao-console": "^3.4.7",
     "qiao-file": "^3.1.9",
-    "qiao-npms": "^3.3.5",
-    "qiao-parallel": "^3.3.0"
+    "qiao-npms": "^3.4.7",
+    "qiao-parallel": "^3.4.7"
   },
   "nx": {
     "namedInputs": {
