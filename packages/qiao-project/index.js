@@ -65,9 +65,7 @@ const eslint = async (configPath) => {
 
   // files
   const results = await eslint.lintFiles([cwd]);
-  const filePaths = results.map((r) => r.filePath);
-  console.log('qiao-project / eslint / files');
-  console.log(filePaths);
+  console.log(`qiao-project / eslint / ${results.length} files`);
 
   // res
   const formatter = await eslint.loadFormatter('stylish');
