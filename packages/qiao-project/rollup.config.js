@@ -7,5 +7,5 @@ module.exports = {
     file: 'index.js',
     format: 'cjs',
   },
-  external: ['qiao-file', 'qiao-cli', 'eslint'],
+  external: ['qiao-file', 'qiao-cli', 'eslint', 'eslint-plugin-react', 'eslint-plugin-react-hooks'],
 };

@@ -22,9 +22,7 @@ const eslint = async (configPath) => {
     }
 
     // eslint
-    console.log('qiao-project / eslint / start');
     await qpro.eslint(finalPath);
-    console.log('qiao-project / eslint / end');
   } catch (e) {
     console.log('qiao-project / eslint / error');
     console.log(e);

@@ -1,5 +1,7 @@
 'use strict';
 
+var eslint$1 = require('eslint');
+
 /**
  * eslint config
  */
@@ -10,42 +12,70 @@ const config = {
     commonjs: true,
     es2022: true,
   },
-  extends: ['eslint:recommended', 'prettier'],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react-hooks/recommended', 'prettier'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
   },
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
+
+    'react/display-name': 'off',
+    'react/prop-types': 'off',
   },
 };
 
 // eslint
-// import { ESLint } from 'eslint';
 
 /**
  * eslint
  */
 const eslint = async (configPath) => {
+  // start
+  console.log('qiao-project / eslint / start');
+
   // config
   const config = getConfig(configPath);
   if (!config) return;
 
-  // // 1. Create an instance.
-  // const eslint = new ESLint();
+  // cwd
+  const cwd = process.cwd();
+  console.log('qiao-project / eslint / cwd', cwd);
 
-  // // 2. Lint files.
-  // const results = await eslint.lintFiles(['lib/**/*.js']);
+  // extensions
+  const extensions = ['.js', '.ts', '.jsx'];
+  console.log('qiao-project / eslint / extensions /', extensions);
 
-  // // 3. Format the results.
-  // const formatter = await eslint.loadFormatter('stylish');
-  // const resultText = formatter.format(results);
+  // eslint
+  const eslint = new eslint$1.ESLint({
+    useEslintrc: false,
+    overrideConfig: config,
+    extensions: extensions,
+    errorOnUnmatchedPattern: false,
+    fix: true,
+  });
 
-  // // 4. Output it.
-  // console.log(resultText);
+  // files
+  const results = await eslint.lintFiles([cwd]);
+  const filePaths = results.map((r) => r.filePath);
+  console.log('qiao-project / eslint / files');
+  console.log(filePaths);
+
+  // res
+  const formatter = await eslint.loadFormatter('stylish');
+  const resultText = formatter.format(results);
+
+  // end
+  console.log('qiao-project / eslint / end');
+  if (resultText) console.log(resultText);
 };
 
 // get config
@@ -54,17 +84,16 @@ function getConfig(configPath) {
     let eslintConfig;
     if (configPath) {
       eslintConfig = require(configPath);
-      console.log('qiao-project / eslint / from / ', configPath);
+      console.log('qiao-project / eslint / config /', configPath);
     } else {
       eslintConfig = config;
-      console.log('qiao-project / eslint / from / default config');
+      console.log('qiao-project / eslint / config / default config');
     }
 
-    console.log('qiao-project / eslint / config / ');
     console.log(eslintConfig);
     return eslintConfig;
   } catch (error) {
-    console.log('qiao-project / eslint / error /', error);
+    console.log('qiao-project / eslint / config /', error);
   }
 }
 
