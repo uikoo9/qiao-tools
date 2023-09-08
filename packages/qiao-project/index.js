@@ -255,15 +255,20 @@ async function formatFiles(cwd, config) {
       if (fileIgnore) continue;
       console.log('qiao-project / prettier / format ', filepath);
 
-      // check
-      config.filepath = filepath;
-      const content = await qiaoFile.readFile(filepath);
-      const isFormated = await prettier__namespace.check(content, config);
+      try {
+        // check
+        config.filepath = filepath;
+        const content = await qiaoFile.readFile(filepath);
+        const isFormated = await prettier__namespace.check(content, config);
 
-      // format
-      if (isFormated) continue;
-      const formatContent = await prettier__namespace.format(content, config);
-      await qiaoFile.writeFile(filepath, formatContent);
+        // format
+        if (isFormated) continue;
+        const formatContent = await prettier__namespace.format(content, config);
+        await qiaoFile.writeFile(filepath, formatContent);
+      } catch (error) {
+        console.log('qiao-project / prettier / format / continue');
+        continue;
+      }
     }
     console.log('qiao-project / prettier / end');
   } catch (error) {

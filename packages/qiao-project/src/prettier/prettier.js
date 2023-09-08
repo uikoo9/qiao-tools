@@ -68,15 +68,20 @@ async function formatFiles(cwd, config) {
       if (fileIgnore) continue;
       console.log('qiao-project / prettier / format ', filepath);
 
-      // check
-      config.filepath = filepath;
-      const content = await readFile(filepath);
-      const isFormated = await prettier.check(content, config);
+      try {
+        // check
+        config.filepath = filepath;
+        const content = await readFile(filepath);
+        const isFormated = await prettier.check(content, config);
 
-      // format
-      if (isFormated) continue;
-      const formatContent = await prettier.format(content, config);
-      await writeFile(filepath, formatContent);
+        // format
+        if (isFormated) continue;
+        const formatContent = await prettier.format(content, config);
+        await writeFile(filepath, formatContent);
+      } catch (error) {
+        console.log('qiao-project / prettier / format / continue');
+        continue;
+      }
     }
     console.log('qiao-project / prettier / end');
   } catch (error) {
