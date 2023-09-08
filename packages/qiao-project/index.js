@@ -161,6 +161,7 @@ const defaultIgnores = [
   '.husky',
   '.eslintignore',
   '.prettierignore',
+  'LICENSE',
   'node_modules',
   'package-lock.json',
 ];
