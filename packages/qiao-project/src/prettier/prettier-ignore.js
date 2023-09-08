@@ -41,7 +41,8 @@ export const getIgnores = async () => {
         if (!line.startsWith('#') && line) ignores.push(line);
       },
       () => {
-        resolve(ignores);
+        const uniqueIgnores = [...new Set(ignores)];
+        resolve(uniqueIgnores);
       },
     );
   });

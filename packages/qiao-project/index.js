@@ -189,7 +189,8 @@ const getIgnores = async () => {
         if (!line.startsWith('#') && line) ignores.push(line);
       },
       () => {
-        resolve(ignores);
+        const uniqueIgnores = [...new Set(ignores)];
+        resolve(uniqueIgnores);
       },
     );
   });
@@ -267,6 +268,7 @@ async function formatFiles(cwd, config) {
     // files
     const files = res.files;
     const ignores = await getIgnores();
+    console.log(ignores);
     for (let i = 0; i < files.length; i++) {
       // filepath
       const filepath = files[i].path;
