@@ -5,9 +5,9 @@ import { ESLint } from 'eslint';
 import { config as defaultConfig } from './config/eslint-config.js';
 
 /**
- * eslint
+ * run eslint
  */
-export const eslint = async (configPath) => {
+export const runEslint = async (configPath) => {
   // start
   console.log('qiao-project / eslint / start');
 

@@ -6,10 +6,10 @@ const cli = require('qiao-cli');
 const qpro = require('../index.js');
 
 /**
- * eslint
+ * prettier
  * @param {*} configPath
  */
-const eslint = async (configPath) => {
+const prettier = async (configPath) => {
   try {
     // final path
     let finalPath;
@@ -21,13 +21,13 @@ const eslint = async (configPath) => {
       finalPath = configPath;
     }
 
-    // eslint
-    await qpro.runEslint(finalPath);
+    // prettier
+    await qpro.runPrettier(finalPath);
   } catch (e) {
-    console.log('qiao-project / eslint / error');
+    console.log('qiao-project / prettier / error');
     console.log(e);
   }
 };
 
-// cmd for eslint
-cli.cmd.command('eslint [configPath]').description('eslint').action(eslint);
+// cmd for prettier
+cli.cmd.command('prettier [configPath]').description('prettier').action(prettier);
