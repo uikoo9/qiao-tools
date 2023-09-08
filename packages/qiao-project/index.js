@@ -146,24 +146,21 @@ const config = {
 
 // file
 
-/**
- * is ignore
- * @param {*} filepath
- * @param {*} ignores
- * @returns
- */
-const isIgnore = async (filepath, ignores) => {
-  // check
-  let ignore = false;
-  for (let i = 0; i < ignores.length; i++) {
-    if (filepath.indexOf(ignores[i]) > -1) {
-      ignore = true;
-      break;
-    }
-  }
-
-  return ignore;
-};
+// default ignores
+const defaultIgnores = [
+  '.git',
+  '.ejs',
+  '.jpg',
+  '.png',
+  '.sql',
+  '.czrc',
+  '.webp',
+  '.husky',
+  '.eslintignore',
+  '.prettierignore',
+  'node_modules',
+  'package-lock.json',
+];
 
 /**
  * get ignores
@@ -174,7 +171,7 @@ const getIgnores = async () => {
   const cwd = process.cwd();
 
   // ignore path
-  const ignores = [];
+  const ignores = [].concat(defaultIgnores);
   const ignorePath = qiaoFile.path.resolve(cwd, './.prettierignore');
 
   // check
@@ -193,6 +190,25 @@ const getIgnores = async () => {
       },
     );
   });
+};
+
+/**
+ * is ignore
+ * @param {*} filepath
+ * @param {*} ignores
+ * @returns
+ */
+const isIgnore = async (filepath, ignores) => {
+  // check
+  let ignore = false;
+  for (let i = 0; i < ignores.length; i++) {
+    if (filepath.indexOf(ignores[i]) > -1) {
+      ignore = true;
+      break;
+    }
+  }
+
+  return ignore;
 };
 
 // eslint
