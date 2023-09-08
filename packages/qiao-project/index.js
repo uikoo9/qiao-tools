@@ -152,8 +152,11 @@ const config = {
 
 // default ignores
 const defaultIgnores = [
+  '.db',
+  '.art',
   '.git',
   '.ejs',
+  '.icns',
   '.jpg',
   '.png',
   '.sql',

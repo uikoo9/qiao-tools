@@ -3,8 +3,11 @@ import { path, isExists, readFileLineByLine } from 'qiao-file';
 
 // default ignores
 const defaultIgnores = [
+  '.db',
+  '.art',
   '.git',
   '.ejs',
+  '.icns',
   '.jpg',
   '.png',
   '.sql',
