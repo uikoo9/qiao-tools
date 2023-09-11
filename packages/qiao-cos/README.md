@@ -126,6 +126,9 @@ cos配套的cdn鉴权
 - return
   - 类型: string
   - 说明: 添加sign和t后的url
+- 备注
+  - config.json中需要添加signKey
+  - 详见：[https://cloud.tencent.com/document/product/228/41625](https://cloud.tencent.com/document/product/228/41625)
 
 ```javascript
 const destPath = '/202309/2e266e54-8ddc-42d9-a772-a24514c5d17b.png';

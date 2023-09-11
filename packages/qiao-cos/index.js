@@ -205,7 +205,7 @@ const init = (config) => {
     return await uploadFolder(app, destFolder, sourceFolder);
   };
   app.cdnSign = (filepath, timeout) => {
-    return cdnSign(config.key, filepath, timeout);
+    return cdnSign(config.signKey, filepath, timeout);
   };
 
   // return
