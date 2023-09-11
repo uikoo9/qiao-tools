@@ -112,3 +112,27 @@ const sourceFolder = '/your/folder';
 const rs = await qcos.uploadFolder(destPath, sourceFolder);
 console.log(rs);
 ```
+
+### cdnSign
+
+cos配套的cdn鉴权
+
+- destPath
+  - 类型: string
+  - 说明: cos 的目标路径，这里以/开头
+- timeout
+  - 类型: number
+  - 说明: 有效时间，单位是秒
+- return
+  - 类型: string
+  - 说明: 添加sign和t后的url
+
+```javascript
+const destPath = '/202309/2e266e54-8ddc-42d9-a772-a24514c5d17b.png';
+
+// timeout is 0
+const url = qcos.cdnSign(destPath);
+
+// timeout is 10s
+const url = qcos.cdnSign(destPath, 10);
+```

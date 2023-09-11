@@ -57,3 +57,10 @@ test('upload folder / absolute folder', async (t) => {
   const rs = await qcos.uploadFolder(destPath, sourceFolder);
   t.truthy(rs);
 });
+
+// cdn
+test('cdn sign', (t) => {
+  const destPath = '/202309/2e266e54-8ddc-42d9-a772-a24514c5d17b.png';
+  const url = qcos.cdnSign(destPath);
+  t.truthy(url);
+});

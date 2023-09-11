@@ -4,6 +4,7 @@ import COS from 'cos-nodejs-sdk-v5';
 // upload
 import { uploadFile } from './upload-file.js';
 import { uploadFolder } from './upload-folder.js';
+import { cdnSign } from './cdn-sign.js';
 
 /**
  * init app
@@ -32,6 +33,9 @@ const init = (config) => {
   };
   app.uploadFolder = async (destFolder, sourceFolder) => {
     return await uploadFolder(app, destFolder, sourceFolder);
+  };
+  app.cdnSign = (filepath, timeout) => {
+    return cdnSign(config.key, filepath, timeout);
   };
 
   // return

@@ -38,6 +38,7 @@
     "cos-nodejs-sdk-v5": "^2.12.4",
     "debug": "^4.3.4",
     "qiao-cli": "^3.4.7",
+    "qiao-encode": "^3.1.9",
     "qiao-file": "^3.2.4"
   },
   "nx": {

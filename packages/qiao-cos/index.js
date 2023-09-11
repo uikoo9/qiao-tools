@@ -142,6 +142,38 @@ const uploadFolder = async (app, destFolder, sourceFolder) => {
   });
 };
 
+// md5
+const { md5 } = require('qiao-encode');
+
+/**
+ * sign img
+ * @param {*} key
+ * @param {*} filepath
+ * @param {*} timeout s
+ * @returns
+ */
+const cdnSign = (key, filepath, timeout) => {
+  // check
+  if (!key) {
+    console.log('qiao-cos / cdnSign / need config.key');
+    return;
+  }
+  if (!filepath) {
+    console.log('qiao-cos / cdnSign / need filepath');
+    return;
+  }
+
+  // str
+  const now = parseInt(Date.now() / 1000) + (timeout || 0);
+  const str = key + filepath + now;
+
+  // md5
+  const md5Str = md5(str, 'hex');
+
+  // url
+  return `${filepath}?sign=${md5Str}&t=${now}`;
+};
+
 // cos
 
 /**
@@ -171,6 +203,9 @@ const init = (config) => {
   };
   app.uploadFolder = async (destFolder, sourceFolder) => {
     return await uploadFolder(app, destFolder, sourceFolder);
+  };
+  app.cdnSign = (filepath, timeout) => {
+    return cdnSign(config.key, filepath, timeout);
   };
 
   // return
