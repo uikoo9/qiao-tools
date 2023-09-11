@@ -1,6 +1,6 @@
 {
   "name": "qiao-cos",
-  "version": "3.5.5",
+  "version": "3.5.8",
   "description": "tencent cos upload tool on nodejs",
   "keywords": [
     "tencent",
