@@ -42,7 +42,10 @@ export const runEslint = async (configPath) => {
 
   // end
   console.log('qiao-project / eslint / end');
-  if (resultText) console.log(resultText);
+  if (resultText) {
+    console.log(resultText);
+    process.exit(1);
+  }
 };
 
 // get config
