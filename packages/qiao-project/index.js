@@ -156,18 +156,30 @@ const config = {
 // default ignores
 const defaultIgnores = [
   '.db',
-  '.art',
+
   '.git',
+
+  '.art',
   '.ejs',
+  '.sql',
+
   '.icns',
   '.jpg',
   '.png',
-  '.sql',
-  '.czrc',
+  '.svg',
   '.webp',
+
+  '.ttf',
+  '.woff',
+  '.woff2',
+
+  '.DS_Store',
+
+  '.czrc',
   '.husky',
   '.eslintignore',
   '.prettierignore',
+
   'LICENSE',
   'node_modules',
   'package-lock.json',
