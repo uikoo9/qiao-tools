@@ -20,4 +20,10 @@ const commitizen = () => {
 };
 
 // cmd for commitizen
-cli.cmd.command('commitizen [configPath]').description('commitizen').action(commitizen);
+cli.cmd
+  .command('commitizen [configPath]')
+  .description('commitizen')
+  .action(() => {
+    process.argv.pop();
+    commitizen();
+  });
