@@ -10,10 +10,9 @@ const { bootstrap } = require('commitizen/dist/cli/git-cz');
 /**
  * commitizen
  */
-const commitizen = async () => {
+const commitizen = () => {
   bootstrap({
-    cliPath: path.join(__dirname, '../../node_modules/commitizen'),
-    // this is new
+    cliPath: path.join(__dirname, '../../commitizen'),
     config: {
       path: 'cz-conventional-changelog',
     },
