@@ -30,7 +30,7 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "npm-check-updates": "^16.13.3",
+    "npm-check-updates": "^16.14.4",
     "qiao-cli": "^3.4.7",
     "qiao-console": "^3.4.7",
     "qiao-file": "^3.2.4",
