@@ -28,8 +28,8 @@ module.exports = function (isDev, cssIncludes, postCssConfig) {
       ruleForCss(isDev, cssIncludes),
       ruleForLess(isDev),
       ruleForSass(isDev, postCssConfig),
+      ruleForReact(isDev),
       ruleForImg,
-      ruleForReact,
       ruleForEjs,
     ],
   };

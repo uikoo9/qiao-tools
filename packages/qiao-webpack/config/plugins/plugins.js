@@ -1,11 +1,14 @@
+// react hmr
+const ReactHMRPlugin = require('./plubin-for-reacthmr.js');
+
+// webpack bundle analyzer
+const BundleAnalyzerPlugin = require('./plugin-for-analyzer.js');
+
 // html webpack plugin
 const HtmlWebpackPlugin = require('./plugin-for-html.js');
 
 // mini css extract plugin
 const MiniCssExtractPlugin = require('./plugin-for-minicss.js');
-
-// webpack bundle analyzer
-const BundleAnalyzerPlugin = require('./plugin-for-analyzer.js');
 
 /**
  * webpack plugins
@@ -17,12 +20,15 @@ const BundleAnalyzerPlugin = require('./plugin-for-analyzer.js');
 module.exports = function (isDev, plugins, isAnalyzer) {
   // check
   const res = [];
-  if (!plugins || !plugins.length) return res;
+
+  // isDev
+  if (isDev) res.push(ReactHMRPlugin());
 
   // isAnalyzer
   if (isAnalyzer) res.push(BundleAnalyzerPlugin());
 
   // plugins
+  if (!plugins || !plugins.length) return res;
   for (let i = 0; i < plugins.length; i++) {
     const plugin = plugins[i];
 
